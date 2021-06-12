@@ -10,7 +10,7 @@ let hint = 1;
 
 //오프닝
 let phone = 500;
-let speed = 10;
+let speed = 20;
 
 //1일차
 let input;
@@ -39,15 +39,22 @@ let watch;
 let flowerout;
 let owner;
 let memo;
+let flower1;
+let flower2;
 
 let people = [];
+let men = []; //지하철에 서있는 사람들
+let men_px = [];
+let men_py = [];
 
 let wobble = 0;
-let memo_h = 500;
+let memo_h = 350;
+let flower1_h = -100;
+let flower2_h = -100;
 let speed3 = 10;
 
 /***** 3일차 게임을 위한 변수들! *****/
-let start_timer = 5; //start 카운트다운 초
+let start_timer = 3; //start 카운트다운 초
 let game3_timer = 115; //게임 총 소요시간
 let game3_trigger = 1; //start 카운트다운 후 게임 스테이지 시작하게 만들 변수
 let timerOn;
@@ -101,6 +108,8 @@ function preload() {
   flowerout = loadImage("assets3/image/flowerout.JPG");
   owner = loadImage("assets3/image/owner.PNG");
   memo = loadImage("assets3/image/memo.png");
+  flower1 = loadImage("assets3/image/flower1.png");
+  flower2 = loadImage("assets3/image/flower2.png");
   
   game3_sw = new p5.Oscillator();
   game3_sw.setType("triangle");
@@ -108,6 +117,10 @@ function preload() {
     game3_imgs[i] = loadImage("assets3/image/station" + i + ".png");
     game3_snds[i] = loadSound("assets3/sound/station_announce" + i + ".mp3");
   }
+  for (let i = 0; i < 7; i++) {
+    men[i+1] = loadImage("assets3/image/man" + (i+1) + ".png");
+  }
+
   for (let i = 0; i < 40; i++) {
     people[i] = new People(
       random(180, 430),
@@ -153,6 +166,11 @@ function setup() {
         break;
       }
     }
+  }
+
+  for(let i = 0; i < 7; i++) {
+    men_px[i] = random(100, 500);
+    men_py[i] = random(100);
   }
 }
 
@@ -1146,139 +1164,112 @@ function draw() {
       switch (stage3) {
         case 0:
           story3_0();
-          next33(1);
           break;
           
         case 1:
-          image(room, 0, 0, width, height);
-          back3(0);
-          next3(2);
-          main_text("오늘은 한번에 깼네.. 애플워치 차고 자길 잘했다..");
+          story3_1();
           break;
           
         case 2:
-          image(room, 0, 0, width, height);
-          back3(1);
-          next3(3);
-          main_text("후.. 다 준비했다.. 선물도 챙겼고..! \n얼굴도 뭐 나쁘지 않고~ 옷도 이 정도면 괜찮네~ 이제 나가보자!");
-          //한 시간 후 ... 
+          story3_2();
           break;
           
         case 3:
-          back3(2);
-          next3(4);
-          main_text("밖으로 나오니까 이제 실감이 나네.. 너무 설렌다..");
+          story3_3();
           break;
           
         case 4:
-          image(flowerout, 0, 0, width, height);
-          back3(3);
-          next3(5);
-          main_text("어? 꽃집이잖아? 지은이가 꽃 좋아한다고 했는데...\n오케이.. 한 번 사 보자! 꽃은 다 옳아~")
+          story3_4();
           break;
           
         case 5:
-          back3(4);
-          next3(6);
-          main_text("흠.. 이것도 예쁘고.. 저것도 예쁜데.. 뭘 사야 잘 샀다고 소문이 나려나~");
+          story3_5();
           break;
           
         case 6:
-          image(owner, 0, 0, width, height);
-          back3(5);
-          contact();
-          next3(7);
-          main_text("<사장님>\n @#$&!@#*$&!*#$!"); // 색상 바꾸기 (conversation function 이용)
+          story3_6();
           break;
           
         case 7:
-          image(owner, 0, 0, width, height);
-          back3(6);
-          next3(8);
-          main_text("마스크 때문에 무슨 말씀하시는지 하나도 모르겠네.. \n꽃 추천해주시는 것 같긴 한데..");
+          story3_7();
           break;
           
         case 8:
-          back3(7);
-          twoChoose3(9, 14);
-          main_text("아 어떡하지...");
+          story3_8();
           break;
           
         case 9:
-          back3(8);
-          next3(10);
-          main_text("에잇! 몰라.. 그냥 예쁜 거 아무거나 사자! 그냥 다 똑같겠지 뭐~");
+          story3_9();
           break;
           
         case 10:
-          back3(9);
-          conversation3(11);
-          main_text("아.. 네네 ㅎㅎ.. 그냥 저기 두 번째 줄에 있는 보라색 꽃으로 주세요..! 저게 제일 예쁘네요..ㅎㅎ");
+          story3_10();
           break;
           
         case 11:
-          back3(10);
-          next3(12);
-          main_text("그래도 꽃 사니까 기분이 좋네 ㅎㅎ 지은이도 좋아하겠지? \n이제 얼굴 볼 일만 남았네~~ 얼른 지하철 타고 가야겠다!");
+          story3_11();
           break;
           
         case 12:
-          image(owner, 0, 0, width, height);
-          back3(11);
-          conversation3(13);
-          main_text("<사장님> \n이상하네.. 분명 애인한테 주는 것 같았는데 아네모네를 고른다고?"); //conversation function으로 교체
+          story3_12();
           break;
           
         case 13:
-          back3(12);
-          next3(21);
-          main_text("그렇다.. 아네모네의 꽃말은 ‘덧없는 사랑’이었던 것이다..."); //가운데 정렬
+          story3_13();
           break;
           
         case 14:
           story3_14();
           break;
+
+        case 15:
+          story3_15();
+          break;
           
+        case 16:
+          story3_16();
+          break;
+
+        case 17:
+          story3_17();
+          break;
+
+        case 18:
+          story3_18();
+          break;
+
+        case 19:
+          story3_19();
+          break;
           
-          
+        case 20:
+          story3_20();
+          break;
+
         case 21:
-          image(station_m, 0, 0, width, height); //지하철 텍스트 추가
-          next3(1);
-          main_text("주말이라 그런가..? 사람이 점점 많아지네..");
+          story3_21();
           break;
 
         case 22:
           image(station_m, 0, 0, width, height);
-          //morePeople();
-          //if(frame3 < 0) {next3(2);}로 아랫줄 바꾸기
-          next3(2);
-          main_text(
-            "아니.. 이러면 안내 화면도 안 보이는데? 나 잘 내릴 수 있을까..?"
-          );
-          back3(0);
+          game3_description();
+          game3_start();
+          back3(21);
           break;
 
         case 23:
-          //next3(3);
-          image(station_m, 0, 0, width, height);
-          game3_description();
-          game3_start();
-          back3(1);
-          break;
-
-        case 24:
           game3();
           break;
 
-        case 25:
+        case 24:
           game3_fail();
           break;
 
-        case 26:
+        case 25:
           game3_success();
           break;
 
-        case 27: //엔딩
+        case 26: //엔딩
           image(park, 0, 0, width, height);
           fill(255, 220);
           rectMode(CORNER);

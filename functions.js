@@ -333,6 +333,8 @@ function next3(s) {
     if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
       stage3 = s;
       frame = 0;
+      flower1_h = -200;
+      flower2_h = -200;
     }
   }
 }
@@ -372,18 +374,27 @@ function choose3(x, y, z) {
     }
     else fill(250);
      text("3", 19, 532);
-    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 40 &&440 <= mouseY &&mouseY <= 470) {
+    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 40 && 440 <= mouseY &&mouseY <= 470) {
       stage3 = x;
       frame = 0;
+      memo_h = 350;
+      flower1_h = -200;
+      flower2_h = -200;
     }
-    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 40 &&475 <= mouseY &&mouseY <= 505
+    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 40 && 475 <= mouseY &&mouseY <= 505
     ) {
       stage3 = y;
       frame = 0;
+      memo_h = 350;
+      flower1_h = -200;
+      flower2_h = -200;
     }
-    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 40 &&510 <= mouseY &&mouseY <= 540) {
+    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 40 && 510 <= mouseY &&mouseY <= 540) {
       stage3 = z;
       frame = 0;
+      memo_h = 350;
+      flower1_h = -200;
+      flower2_h = -200;
     }
   }
 }
@@ -394,6 +405,7 @@ function back3(a) {
   if (30 <= frame) {
     noStroke();
     textSize(15);
+    textFont(bom);
     if (4 <= mouseX && mouseX <= 54 && 0 <= mouseY && mouseY <= 30) {
       fill(245, 87, 66);
     }
@@ -405,6 +417,9 @@ function back3(a) {
     if (mouseIsPressed && 4 <= mouseX && mouseX <= 54 && 0 <= mouseY && mouseY <= 30) {
       stage3 = a;
       frame = 0;
+      memo_h = 350;
+      flower1_h = -200;
+      flower2_h = -200;
     }
   }
 }
@@ -533,37 +548,39 @@ function twoChoose2(x,y){
 function twoChoose3(x,y){
   frame = frame + 1;
   noStroke();
-  fill(182, 209, 240, 180);
-  rectMode(CORNER);
-  rect(0, 390, 800, 160);
-  stroke(250);
-  strokeWeight(2);
-  fill(151, 223, 247);
-  rect(10, 457, 30, 30);
-  rect(10, 510, 30, 30);
   
-  noStroke();
-  textSize(20);
-  textAlign(LEFT);
-  textFont(bom);
-  if (10 <= mouseX && mouseX <= 450 && 457 <= mouseY && mouseY <= 505) {
-    fill(3, 186, 252);
-  }
-  else fill(250);
-  text("1", 21, 478);
-  if (10 <= mouseX && mouseX <= 450 && 510 <= mouseY && mouseY <= 540) {
-    fill(3, 186, 252);
-  }
-  else fill(250);
-  text("2", 19, 532);
+    fill(182, 209, 240, 180);
+    rectMode(CORNER);
+    rect(0, 390, 800, 160);
+    stroke(250);
+    strokeWeight(2);
+    fill(151, 223, 247);
+    rect(10, 457, 30, 30);
+    rect(10, 510, 30, 30);
+    if (30 <= frame) {
+    noStroke();
+    textSize(20);
+    textAlign(LEFT);
+    textFont(bom);
+    if (10 <= mouseX && mouseX <= 530 && 457 <= mouseY && mouseY <= 505) {
+      fill(3, 186, 252);
+    }
+    else fill(250);
+    text("1", 21, 478);
+    if (10 <= mouseX && mouseX <= 720 && 510 <= mouseY && mouseY <= 540) {
+      fill(3, 186, 252);
+    }
+    else fill(250);
+    text("2", 19, 532);
 
-  if ( mouseIsPressed &&10 <= mouseX &&mouseX <= 450 &&457 <= mouseY &&mouseY <= 505) {
-      stage3 = x;
-      frame = 0;
-  }
-  if (mouseIsPressed &&10 <= mouseX &&mouseX <= 450 &&510 <= mouseY && mouseY <= 540) {
-      stage3 = y;
-      frame = 0;
+    if ( mouseIsPressed &&10 <= mouseX &&mouseX <= 540 && 457 <= mouseY &&mouseY <= 505) {
+        stage3 = x;
+        frame = 0;
+    }
+    if (mouseIsPressed &&10 <= mouseX &&mouseX <= 740 && 510 <= mouseY && mouseY <= 540) {
+        stage3 = y;
+        frame = 0;
+    }
   }
 }
 
@@ -594,16 +611,15 @@ function next33(s) {
   frame = frame + 1;
   noStroke();
   if (30 <= frame) {
-    fill(0);
     noStroke();
-    textSize(20);
-    textAlign(LEFT);
+    textSize(25);
     textFont(bom);
     if (700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
       fill(3, 186, 252);
     }
     else fill(0);
-     text(">>NEXT", 720, 535);
+    textAlign(LEFT);
+    text(">>NEXT", 710, 535);
     if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
       stage3 = s;
       frame = 0;

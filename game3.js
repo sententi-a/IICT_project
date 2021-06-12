@@ -2,7 +2,11 @@
 
 /*****게임3 이전 스토리: 지하철에 사람이 많아짐*****/
 function morePeople() {
-  frame3 = 10;
+  image(men[1], 430, 180, 150, 300);
+  image(men[5], 460, 150, 150, 300);
+  image(men[4], 400, 180, 200, 400);
+  image(men[6], 600, 250, 300, 600);
+  image(men[3], 480, 120, 200, 400);
 }
 
 /*****게임3 세부 스테이지 관리*****/
@@ -18,6 +22,7 @@ function game3() {
   textFont(nanum1);
   textAlign(CENTER);
   textSize(65);
+
   if(start_timer > 0) {
     text(start_timer, width / 2, height / 2 + 42);
   }
@@ -105,7 +110,7 @@ function game3() {
       if (game3_snds[st3].isPlaying()) {
         game3_snds[st3].stop();
       }
-      stage3 = 4;
+      stage3 = 24;
     }
   }
 }
@@ -113,6 +118,7 @@ function game3() {
 /*****게임 설명*****/
 function game3_description() {
   /**이미지 위 깔리는 사각형**/
+  noStroke();
   fill(255, 220);
   rectMode(CORNER);
   rect(0, 0, width, height);
@@ -147,7 +153,7 @@ function game3_description() {
   textFont(nanum2);
   textSize(20);
   textLeading(50);
-  text("* 안내 방송이 끝나기 전에 ‘합정역’ 글자가 보이면 버튼을 눌러주세요.\n* 총 5개의 스테이지 중 '합정역'은 2번 나옵니다.\n* 힌트 듣기를 누르면 안내 방송을 명확하게 들을 수 있어요.", width/2, 295);  
+  text("* 안내 방송이 끝나기 전 ‘합정역’이 보이면 내리기 버튼을 눌러주세요.\n* 총 다섯 개의 역 중 합정역은 두 번 나옵니다.\n* 힌트 듣기를 누르면 안내 방송을 명확하게 들을 수 있어요.", width/2, 295);  
 }
 
 /*****게임시작 버튼*****/
@@ -164,8 +170,8 @@ function game3_start() {
   text("START", width/2, 500+10);
   
   if(mouseIsPressed && mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 25 && mouseY < 500 + 25) {
-    stage3 +=1;
-    if(stage3 == 3) { //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
+    stage3 += 1;
+    if(stage3 == 23) { //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
     timerOn = setInterval(timeCount, 1000);
     }
   }
@@ -311,7 +317,7 @@ function game3_check(n) {
     if (game3_snds[n].isPlaying()) {
       game3_snds[n].stop();
     }
-    stage3 = 5; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
+    stage3 = 25; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
   }
   //그 외의 역에서 내린다면 FAIL
   else if(mouseIsPressed && mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30) {
@@ -322,7 +328,7 @@ function game3_check(n) {
     if (game3_snds[n].isPlaying()) {
       game3_snds[n].stop();
     }
-    stage3 = 4; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
+    stage3 = 24; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
   }
 }
 
@@ -339,6 +345,7 @@ function game3_fail() {
   fill(255, 130, 130);
   text("GAME OVER", width/2, height/2 - 80);
   next33(6);
+
   //다음으로 버튼
   // rectMode(CENTER);
   // noStroke();
