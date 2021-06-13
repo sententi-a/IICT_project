@@ -65,10 +65,10 @@ let frame3 = 0;
 
 /***** 3일차 게임을 위한 변수들! *****/
 let start_timer = 3; //start 카운트다운 초
-let game3_timer = 65; //게임 총 소요시간
+let game3_timer = 63; //게임 총 소요시간
 let game3_trigger = 1; //start 카운트다운 후 게임 스테이지 시작하게 만들 변수
 let timerOn;
-let px = [4400, 4900, 4850, 4900, 5800]; //역이름 위치
+let px = [4400, 4900, 4850, 4900, 4800]; //역이름 위치
 
 
 let game3_imgs = []; //게임에 쓰일 이미지 모음
@@ -81,8 +81,6 @@ let game3_stages = 5; //게임 스테이지 개수
 let st3 = 0; //game stage 번호
 let game3_nums = []; //이미지/사운드 번호 (랜덤)
 
-//나중에 변경할 이미지임!
-// let station;
 
 function preload() {
   //서로 공유하는 에셋들
@@ -116,7 +114,7 @@ function preload() {
   //3일차
   park = loadImage("assets3/image/park.jpg");
   station_m = loadImage("assets3/image/subway.jpg");
-  
+  /*****여기에서부터  */
   watch = loadImage("assets3/image/watch.png");
   flowerout = loadImage("assets3/image/flowerout.JPG");
   owner = loadImage("assets3/image/owner.PNG");
@@ -126,9 +124,10 @@ function preload() {
   subway_back = loadImage("assets3/image/station_back.png")
   subway_front = loadImage("assets3/image/subway_front.png")
   game3_ex = loadImage("assets3/image/game3_example.png");
-  
+  /*****여기까지 추가 */
   game3_sw = new p5.Oscillator();
   game3_sw.setType("triangle");
+  /*****밑은 싹 다 복붙 부탁드려요~ */
   for (let i = 0; i < game3_stages; i++) {
     game3_imgs[i] = loadImage("assets3/image/station_name" + i + ".png");
     game3_answer[i] = loadImage("assets3/image/station" + i + ".png");
@@ -1277,35 +1276,60 @@ function draw() {
           game3_success();
           break;
 
-        case 26: //엔딩
-          image(park, 0, 0, width, height);
-          fill(255, 220);
-          rectMode(CORNER);
-          rect(0, 0, width, height);
-          textAlign(CENTER);
-          textFont(nanum1);
-          textSize(40);
-          fill(0, 157, 255);
-          text("- Play Test 끝 -", width / 2, 170);
+        case 26: 
+          story3_26();
+          break;
 
-          textFont(nanum2);
-          textSize(25);
-          fill(20);
+        case 27:
+          story3_27();
+          break;
 
-          textLeading(50);
-          text(
-            "이 부분에는 에필로그가 들어갈 예정입니다! \n스포일러 방지를 위해 내용은 넣지 않았습니다. \n최종 발표날을 기대해주세요! 감사합니다~",
-            width / 2,
-            height / 2 - 50
-          );
-          textFont(bom);
-          textSize(25);
-          fill(80);
-          text("엔터키를 눌러 다시 시작하기", width / 2, 450);
+        case 28:
+          story3_28();
+          break;
+
+        case 29:
+          story3_29();
+          break;
+
+        case 30:
+          story3_30();
+          break;
+
+        case 31:
+          story3_31();
+          break;
+
+        case 32:
+          story3_32();
+          break;
+
+        case 33:
+          story3_33();
+          break;
+        
+        case 34: 
+          story3_34();
+          break;
+
+        case 35:
+          story3_35(); //지은이 다가오는 모습
+          break;
+
+        case 36:
+          story3_36(); //안녕?ㅎㅎ 카톡
+          break;
+
+        case 37:
+          story3_37(); //지은이 얼굴 크게 
+          break;
+
+        case 38:
+          story3_38(); //에필로그 
           if (keyCode === ENTER) {
             resetAll();
           }
-          break;
+          break;    
 
         default:
           break;
@@ -1358,7 +1382,7 @@ function resetAll() {
   speed3 = 10;
   frame3 = 0;
   start_timer = 3; //start 카운트다운 초
-  game3_timer = 65; 
+  game3_timer = 63; 
   px[0] = 4400;
   px[1] = 4900;
   px[2] = 4850;

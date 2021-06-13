@@ -203,7 +203,6 @@ function story3_17() {
 
 function story3_18() {
   frame += 1;
-  image(owner, 0, 0, width, height);
   if(frame > 5) {
     image(flower2, 0, flower2_h, width, height);
     flower2_h += speed3;
@@ -251,6 +250,111 @@ function story3_21() {
   back3(20);
 }
 
+function story3_26() { //게임 실패 후
+  conversation3(27);
+  con_text3("< 나 > \n헉헉.. ")
+}
+
+function story3_27() {
+  next3(28);
+  main_text("일찍 나왔으니 망정이지 하마터면 못 만날 뻔했네.. 휴..");
+  back3(26);
+}
+
+function story3_28() {
+  next3(29);
+  main_text("어? 뭐야.. 꽃 어디갔어..?");
+  back3(27);
+}
+
+function story3_29() {
+  next3(30);
+  main_text("헐?? 없잖아??? 지하철에 놓고 내렸나??");
+  back3(28);
+}
+
+function story3_30() {
+  next3(31);
+  main_text("하씨.. 아니야.. 괜찮아.. \n꽃 줬으면 부담스러웠을 수도 있어.. 그래..");
+  back3(29);
+}
+
+function story3_31() {
+  next3(34);
+  main_text("에휴 일단 도착했다고 카톡 먼저 보내자..");
+  back3(30);
+}
+
+function story3_32() { //게임 성공 후 
+  next3(33);
+  main_text("휴.. 다행히 잘 내렸다! 지은이는 잘 오고 있겠지?");
+}
+
+function story3_33() {
+  next3(34);
+  main_text("설렌다..ㅎㅎ 일단 카톡 보내놓고 기다리자..!");
+  back3(32);
+}
+
+function story3_34() {
+  frame = frame + 1;
+  if(frame > 5) {
+    image(kakao1,  204, memo_h, 392, 700);
+    memo_h -= speed3;
+  }
+ 
+  if (frame > 30) {
+    memo_h = 70;
+  }
+
+  if (frame > 40) {
+    image(mb, 310, memo_h + 160, 250, 100);
+    phone_text("지은아 나 도착했어~", 325, memo_h+205);
+    phone_text("기다리고 있을게!", 325, memo_h + 242);
+  }
+
+  if(frame > 50) {
+    next33(35);
+    back3(33);
+  }
+}
+
+function story3_35() { //지은이가 다가오는 모습 frame 수 조절해서 넣고, 그 다음 next 버튼 뜨게 
+  next33(36);
+  back3(34);
+}
+
+function story3_36() {
+  frame = frame + 1;
+  if(frame > 5) {
+    image(kakao1,  204, memo_h, 392, 700);
+    memo_h -= speed3;
+  }
+ 
+  if (frame > 30) {
+    memo_h = 70;
+  }
+
+  if (frame > 40) {
+    image(yb, 205, memo_h + 160, 250, 100);
+    phone_text("안녕?ㅎㅎ", 325, memo_h+205);
+  }
+
+  if(frame > 50) {
+    next33(37);
+    back3(35);
+  }
+}
+
+function story3_37() {
+  //지은이 얼굴 크게 !
+  back3(36);
+  next33(38); //에필로그 보러 가기 ! 
+}
+
+function story3_38() {
+  //에필로그 
+}
 
 function conversation3(s) {
   frame = frame + 1;
@@ -322,6 +426,7 @@ function explain3(s) {
     textFont(bom);
     textSize(25);
     text(t, 15, 435);
+    noStroke();
     }
   
 
@@ -368,6 +473,7 @@ function next3(s) {
     if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
       stage3 = s;
       frame = 0;
+      memo_h = 350;
       flower1_h = -200;
       flower2_h = -200;
     }
@@ -405,10 +511,16 @@ function next3(s) {
         if ( mouseIsPressed &&10 <= mouseX &&mouseX <= 540 && 457 <= mouseY &&mouseY <= 505) {
             stage3 = x;
             frame = 0;
+            memo_h = 350;
+            flower1_h = -200;
+            flower2_h = -200;
         }
         if (mouseIsPressed &&10 <= mouseX &&mouseX <= 710 && 510 <= mouseY && mouseY <= 540) {
             stage3 = y;
             frame = 0;
+            memo_h = 350;
+            flower1_h = -200;
+            flower2_h = -200;
         }
       }
     }
@@ -429,6 +541,9 @@ function next3(s) {
         if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
           stage3 = s;
           frame = 0;
+          memo_h = 350;
+          flower1_h = -200;
+          flower2_h = -200;
         }
       }
     }

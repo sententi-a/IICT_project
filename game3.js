@@ -42,7 +42,6 @@ function game3() {
     else if(game3_timer <=35 && game3_timer > 25) {
       st3 = 2;
       game3_image(game3_nums[st3]);
-    
       game3_text(25);
       game3_info("세 번째 역");
       game3_sound(game3_nums[st3]);
@@ -58,7 +57,6 @@ function game3() {
     else if(game3_timer <= 23 && game3_timer > 13) {
       st3 = 3;
       game3_image(game3_nums[st3]);
-      
       game3_text(13);
       game3_info("네 번째 역");
       game3_sound(game3_nums[st3]);
@@ -82,7 +80,7 @@ function game3() {
     }
     
     //Time Over
-    else if (game3_timer <= 1){
+    else if (game3_timer <= 0){
       clearInterval(timerOn);
       game3_playing = true;
       if(game3_playing) {
@@ -175,7 +173,7 @@ function timeCount() {
 function game3_image(n) {
   image(subway_back, 0, 0, width, height);
   image(game3_imgs[n],px[n],0,800,600);
-  px[n] -= 20;
+  px[n] -= 10;
   image(subway_front, 0, 0, width, height);
 }
 
@@ -192,7 +190,7 @@ function game3_sound(n) {
     fill(0);
     textSize(23);
     textAlign(CENTER);
-    textFont(nanum1);
+    textFont(bom);
     text("힌트 소진",710, 58);
   }
 
@@ -200,7 +198,7 @@ function game3_sound(n) {
   if(hint == 1 || (hint == -3 && (game3_timer == 59 || game3_timer == 47 || game3_timer == 35 || game3_timer == 23 || game3_timer == 11))) {
     game3_playing = false;
   }
-  game3_sw.amp(0.1);
+  game3_sw.amp(0.05);
   game3_sw.freq(random(20, 50));
   if(!game3_playing) {
     game3_sw.start();
@@ -219,7 +217,7 @@ function game3_sound(n) {
     rectMode(CORNER);
     rect(650, 30, 120, 40, 30);
     textSize(23);
-    textFont(nanum1);
+    textFont(bom);
     if(mouseX >= 650 && mouseX <= 770 && mouseY >= 30 && mouseY <=70) fill(28, 170, 255);
     else fill(255);
     textAlign(CENTER);
@@ -230,7 +228,7 @@ function game3_sound(n) {
         game3_sw.stop();
       }
       hint = -3;
-      game3_snds[n].amp(0.8);
+      game3_snds[n].amp(0.5);
     }
   }
 }
@@ -242,7 +240,7 @@ function game3_obst() {
 /*****게임 상단 정보 텍스트*****/
 function game3_text(n) {
   textAlign(CENTER);
-  textFont(nanum1);
+  textFont(best);
   textSize(20);
   fill(85);
   text("남은 시간 : ", width/2 - 10, 120); 
@@ -251,10 +249,10 @@ function game3_text(n) {
 
 function game3_info(t) {
   fill(60);
-  textFont(bom);
+  textFont(best);
   textAlign(CENTER);
   textSize(35);
-  text(t, width/2, 55);
+  text(t, width/2, 60);
 }
 
 /*****다음 스테이지로 가는 것 알려주기*****/
@@ -272,14 +270,15 @@ function game3_next(n) {
   rectMode(CORNER);
   rect(0, 0, width, height);
   fill(100);
+  textFont(best);
   textAlign(CENTER);
   textSize(35);
-  textFont(bom);
+  textFont(best);
   text("다음 역으로...", width/2, 55);
 }
 
 /*****내리기 버튼*****/
-function game3_check(n) {
+function game3_check(num) {
   rectMode(CENTER);
   noStroke();
   if(mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30) fill(255, 100, 100);
@@ -292,25 +291,26 @@ function game3_check(n) {
   text("내리기", width/2, 500 + 10);
   
   //합정역에서 내린다면 SUCCESS
-  if( (mouseIsPressed && mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30) && (n == 0 || n ==4)) {
+  if( (mouseIsPressed && mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30) && (num == 0 || num == 4)) {
     clearInterval(timerOn);
     game3_playing = true;
     if(game3_playing) {
       game3_sw.stop();
     }
-    if (game3_snds[n].isPlaying()) {
-      game3_snds[n].stop();
+    if (game3_snds[num].isPlaying()) {
+      game3_snds[num].stop();
     }
     stage3 = 25; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
   }
   //그 외의 역에서 내린다면 FAIL
   else if(mouseIsPressed && mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30) {
+    clearInterval(timerOn);
     game3_playing = true;
     if(game3_playing) {
       game3_sw.stop();
     }
-    if (game3_snds[n].isPlaying()) {
-      game3_snds[n].stop();
+    if (game3_snds[num].isPlaying()) {
+      game3_snds[num].stop();
     }
     stage3 = 24; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
   }
@@ -319,7 +319,7 @@ function game3_check(n) {
 /*****게임 실패*****/
 function game3_fail() {
   clearInterval(timerOn);
-  game3_image(game3_nums[st3]);
+  game3_answershow(game3_nums[st3]);
   fill(255, 50);
   rectMode(CORNER);
   rect(0, 0, width, height);
@@ -327,7 +327,7 @@ function game3_fail() {
   textAlign(CENTER);
   textFont(bom);
   fill(255, 130, 130);
-  text("GAME OVER", width/2, height/2 - 80);
+  text("GAME OVER", width/2, height/2 - 150);
   next33(26);
 
   //다음으로 버튼
@@ -348,7 +348,7 @@ function game3_fail() {
 
 /*****게임 성공*****/
 function game3_success() {
-  game3_image(game3_nums[st3]);
+  game3_answershow(game3_nums[st3]);
   fill(255, 50);
   rectMode(CORNER);
   rect(0, 0, width, height);
@@ -356,8 +356,8 @@ function game3_success() {
   textFont(bom);
   textAlign(CENTER);
   fill(28, 170, 255);
-  text("SUCCESS!", width/2, height/2 - 80);
-  next33(26);
+  text("SUCCESS!", width/2, height/2 -150);
+  next33(32);
   //다음으로 버튼
   // rectMode(CENTER);
   // noStroke();
