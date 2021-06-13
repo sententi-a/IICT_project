@@ -43,6 +43,7 @@ let flower1;
 let flower2;
 let subway_back;
 let subway_front;
+let game3_ex;
 
 let rperson= [];
 let lperson = [];
@@ -64,23 +65,24 @@ let frame3 = 0;
 
 /***** 3일차 게임을 위한 변수들! *****/
 let start_timer = 3; //start 카운트다운 초
-let game3_timer = 60; //게임 총 소요시간
+let game3_timer = 65; //게임 총 소요시간
 let game3_trigger = 1; //start 카운트다운 후 게임 스테이지 시작하게 만들 변수
 let timerOn;
-let px = [4400, 4900, 4850, 4900, 4800]; //역이름 위치
+let px = [4400, 4900, 4850, 4900, 5800]; //역이름 위치
 
 
 let game3_imgs = []; //게임에 쓰일 이미지 모음
 let game3_sw; //sound wave
 let game3_playing = false; //sound wave 관리
 let game3_snds = []; //게임에 쓰일 사운드 모음
+let game3_answer = [];
 
 let game3_stages = 5; //게임 스테이지 개수
 let st3 = 0; //game stage 번호
 let game3_nums = []; //이미지/사운드 번호 (랜덤)
 
 //나중에 변경할 이미지임!
-let station;
+// let station;
 
 function preload() {
   //서로 공유하는 에셋들
@@ -123,11 +125,13 @@ function preload() {
   flower2 = loadImage("assets3/image/flower2.png");
   subway_back = loadImage("assets3/image/station_back.png")
   subway_front = loadImage("assets3/image/subway_front.png")
+  game3_ex = loadImage("assets3/image/game3_example.png");
   
   game3_sw = new p5.Oscillator();
   game3_sw.setType("triangle");
   for (let i = 0; i < game3_stages; i++) {
     game3_imgs[i] = loadImage("assets3/image/station_name" + i + ".png");
+    game3_answer[i] = loadImage("assets3/image/station" + i + ".png");
     game3_snds[i] = loadSound("assets3/sound/station_announce" + i + ".mp3");
   }
   for (let i = 0; i < 8; i++) {
@@ -1299,21 +1303,7 @@ function draw() {
           fill(80);
           text("엔터키를 눌러 다시 시작하기", width / 2, 450);
           if (keyCode === ENTER) {
-            stage0 = 0;
-            frame = 0;
-            days = 0;
-            phone = 500;
-            speed = 10;
-            hint = 1;
-            stage1 = 0;
-            stage2 = 0;
-            stage3 = 0;
-            frame = 0;
-            days = 0;
-            start_timer = 5;
-            game3_trigger = 1;
-            game3_timer = 115;
-            st3 = 0;
+            resetAll();
           }
           break;
 
@@ -1341,4 +1331,39 @@ function draw() {
       stage1 = stage1;
     }
   }
+}
+
+function resetAll() {
+  stage0 = 0;
+  stage1 = 0;
+  stage2 = 0;
+  stage3 = 0;
+  frame = 0;
+  days = 3;
+  hint = 1;
+  phone = 500;
+  speed = 20;
+  actCreated = false;
+  movieCreated = false;
+  wobble = 0;
+  wobble1 = 0; 
+  wobble2 = 0;
+  wobble3 = 0;
+  wobble4 = 0;
+  wobble5 = 0;
+  wobble6 = 0;
+  memo_h = 350;
+  flower1_h = -100;
+  flower2_h = -100;
+  speed3 = 10;
+  frame3 = 0;
+  start_timer = 3; //start 카운트다운 초
+  game3_timer = 65; 
+  px[0] = 4400;
+  px[1] = 4900;
+  px[2] = 4850;
+  px[3] = 5200;
+  px[4] = 5800; 
+  game3_playing = false;
+  st3 = 0
 }

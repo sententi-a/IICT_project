@@ -5,7 +5,7 @@
 
 /*****게임3 세부 스테이지 관리*****/
 function game3() {
-  image(game3_imgs[0], 0, 0, width, height);
+  image(game3_ex, 0, 0, width, height); //예시 이미지 추가 예정입니다! 
   if (game3_trigger == 1) {
     //game3의 스테이지 0
     if(game3_timer <= 59 && game3_timer > 49) {
@@ -179,6 +179,10 @@ function game3_image(n) {
   image(subway_front, 0, 0, width, height);
 }
 
+function game3_answershow(n) {
+  image(game3_answer[n], 0, 0, 800, 600);
+}
+
 /*****사운드 플레이, 플레이할 사운드는 n에 숫자 넣어서 선택!*****/
 function game3_sound(n) { 
   if(hint != 1) {
@@ -263,7 +267,7 @@ function game3_next(n) {
   if (game3_snds[n].isPlaying()) {
     game3_snds[n].stop();
   }
-  game3_image(game3_nums[n]);
+  game3_answershow(game3_nums[n]);
   fill(255, 200);
   rectMode(CORNER);
   rect(0, 0, width, height);
@@ -324,7 +328,7 @@ function game3_fail() {
   textFont(bom);
   fill(255, 130, 130);
   text("GAME OVER", width/2, height/2 - 80);
-  next33(6);
+  next33(26);
 
   //다음으로 버튼
   // rectMode(CENTER);
@@ -353,7 +357,7 @@ function game3_success() {
   textAlign(CENTER);
   fill(28, 170, 255);
   text("SUCCESS!", width/2, height/2 - 80);
-  next33(6);
+  next33(26);
   //다음으로 버튼
   // rectMode(CENTER);
   // noStroke();

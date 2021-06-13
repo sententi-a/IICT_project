@@ -252,9 +252,6 @@ function story3_21() {
 }
 
 
-
-
-
 function conversation3(s) {
   frame = frame + 1;
   noStroke();
