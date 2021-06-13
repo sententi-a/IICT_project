@@ -1,102 +1,83 @@
 /*****게임3 관련 함수들이 모여 있습니다! 꼭 index.html body 안에 import해주세요! *****/
 
 /*****게임3 이전 스토리: 지하철에 사람이 많아짐*****/
-function morePeople() {
-  image(men[1], 430, 180, 150, 300);
-  image(men[5], 460, 150, 150, 300);
-  image(men[4], 400, 180, 200, 400);
-  image(men[6], 600, 250, 300, 600);
-  image(men[3], 480, 120, 200, 400);
-}
+
 
 /*****게임3 세부 스테이지 관리*****/
 function game3() {
-  game3_image(0);
-  // fill(255, 230);
-  rectMode(CORNER);
-  // rect(0, 0, width, height);
-  fill(255);
-  rect(width/2 - 110, height/2 - 30, 240, 100, 60);
-  //fill(255, 130, 130);
-  fill(20);
-  textFont(nanum1);
-  textAlign(CENTER);
-  textSize(65);
-
-  if(start_timer > 0) {
-    text(start_timer, width / 2, height / 2 + 42);
-  }
-  else if(start_timer > -1){
-   
-    //fill(255, 130, 130);
-    textSize(55);
-    text("게임 시작", width/2, height/2 + 37);
-    game3_trigger = 0;
-  }
-
-  if (game3_trigger == 0) {
+  image(game3_imgs[0], 0, 0, width, height);
+  if (game3_trigger == 1) {
     //game3의 스테이지 0
-    if(game3_timer <= 109 && game3_timer > 89) {
+    if(game3_timer <= 59 && game3_timer > 49) {
       game3_image(game3_nums[st3]);
-      game3_obst();
-      game3_text(st3, 89);
+      game3_text(49);
+      game3_info("첫 번째 역");
       game3_sound(game3_nums[st3]);
+      standing(0);
       game3_check(game3_nums[st3]);
     }
     
-    else if(game3_timer <= 89 && game3_timer > 87) {
+    else if(game3_timer <= 49 && game3_timer > 47) {
       game3_next(st3);
     }
     
     //game3의 스테이지 1
-    else if(game3_timer <= 87 && game3_timer > 67) {
+    else if(game3_timer <= 47 && game3_timer > 37) {
       st3 = 1;
       game3_image(game3_nums[st3]);
-      game3_obst();
-      game3_text(st3, 67);
+    
+      game3_text(37);
+      game3_info("두 번째 역");
       game3_sound(game3_nums[st3]);
+      
+      standing(1);
       game3_check(game3_nums[st3]);
     }
     
-    else if(game3_timer <= 67 && game3_timer > 65) {
+    else if(game3_timer <= 37 && game3_timer > 35) {
       game3_next(st3);
     }
     
     //game3의 스테이지 2
-    else if(game3_timer <=65 && game3_timer > 45) {
+    else if(game3_timer <=35 && game3_timer > 25) {
       st3 = 2;
       game3_image(game3_nums[st3]);
-      game3_obst();
-      game3_text(st3, 45);
+    
+      game3_text(25);
+      game3_info("세 번째 역");
       game3_sound(game3_nums[st3]);
+      standing(2);
       game3_check(game3_nums[st3]);
     }
     
-    else if(game3_timer <= 45 && game3_timer > 43) {
+    else if(game3_timer <= 25 && game3_timer > 23) {
       game3_next(st3);
     }
     
     //game3의 스테이지 3
-    else if(game3_timer <= 43 && game3_timer > 23) {
+    else if(game3_timer <= 23 && game3_timer > 13) {
       st3 = 3;
       game3_image(game3_nums[st3]);
-      game3_obst();
-      game3_text(st3, 23);
+      
+      game3_text(13);
+      game3_info("네 번째 역");
       game3_sound(game3_nums[st3]);
+      standing(1);
       game3_check(game3_nums[st3]);
     }
     
-    else if(game3_timer <=23 && game3_timer > 21) {
+    else if(game3_timer <=13 && game3_timer > 11) {
       game3_next(st3);
     }
     
     //game3의 스테이지 4
-    else if(game3_timer <= 21 && game3_timer > 1) {
+    else if(game3_timer <= 11 && game3_timer > 1) {
       st3 = 4;
       game3_image(game3_nums[st3]);
-      game3_obst();
-      game3_text(st3, 1);
+      game3_text(1);
+      game3_info("마지막 역");
       game3_sound(game3_nums[st3]);
+      standing(0);
       game3_check(game3_nums[st3]);
     }
     
@@ -114,6 +95,7 @@ function game3() {
     }
   }
 }
+
 
 /*****게임 설명*****/
 function game3_description() {
@@ -171,6 +153,7 @@ function game3_start() {
   
   if(mouseIsPressed && mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 25 && mouseY < 500 + 25) {
     stage3 += 1;
+    frame = 0;
     if(stage3 == 23) { //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
     timerOn = setInterval(timeCount, 1000);
     }
@@ -190,7 +173,10 @@ function timeCount() {
 
 /*****게임 이미지*****/
 function game3_image(n) {
-  image(game3_imgs[n],0,0,800,600);
+  image(subway_back, 0, 0, width, height);
+  image(game3_imgs[n],px[n],0,800,600);
+  px[n] -= 20;
+  image(subway_front, 0, 0, width, height);
 }
 
 /*****사운드 플레이, 플레이할 사운드는 n에 숫자 넣어서 선택!*****/
@@ -198,84 +184,78 @@ function game3_sound(n) {
   if(hint != 1) {
     rectMode(CORNER);
     fill(150);
-    rect(650, 35, 120, 40, 30);
+    rect(650, 30, 120, 40, 30);
     fill(0);
     textSize(23);
     textAlign(CENTER);
     textFont(nanum1);
-    text("힌트 소진",710, 63);
+    text("힌트 소진",710, 58);
   }
-   //sound wave (좋지 않은 소리)
-  game3_playing = false;
-  game3_sw.freq(random(100));
-  if(hint == -3) {
-    game3_sw.amp(0);
+
+    //sound wave (좋지 않은 소리)
+  if(hint == 1 || (hint == -3 && (game3_timer == 59 || game3_timer == 47 || game3_timer == 35 || game3_timer == 23 || game3_timer == 11))) {
+    game3_playing = false;
   }
-  else {
-    game3_sw.amp(0.2);
-  }
+  game3_sw.amp(0.1);
+  game3_sw.freq(random(20, 50));
   if(!game3_playing) {
     game3_sw.start();
   }
-    //밑에 조그맣게 원본 사운드 깔림
+      //밑에 조그맣게 원본 사운드 깔림
   if (!game3_snds[n].isPlaying()) {
-    if(hint == -3) {
-      game3_snds[n].amp(0.8);
-    }
-    else {
-      game3_snds[n].amp(0.001);
-    }
+    game3_snds[n].amp(0.001);
     game3_snds[n].play();
   }  
+  
 
   if(hint == 1) {
     //힌트 듣기 버튼
     noStroke();
     fill(143, 212, 255); 
     rectMode(CORNER);
-    rect(650, 35, 120, 40, 30);
+    rect(650, 30, 120, 40, 30);
     textSize(23);
     textFont(nanum1);
-    if(mouseX >= 650 && mouseX <= 770 && mouseY >= 35 && mouseY <=75) fill(28, 170, 255);
+    if(mouseX >= 650 && mouseX <= 770 && mouseY >= 30 && mouseY <=70) fill(28, 170, 255);
     else fill(255);
     textAlign(CENTER);
-    text("힌트 듣기",710, 63);
-    if(mouseIsPressed && mouseX >= 650 && mouseX <= 770 && mouseY >= 35 && mouseY <=75) {
+    text("힌트 듣기",710, 58);
+    if(mouseIsPressed && mouseX >= 650 && mouseX <= 770 && mouseY >= 30 && mouseY <=70) {
+      game3_playing = true;
+      if(game3_playing) {
+        game3_sw.stop();
+      }
       hint = -3;
-      game3_snds[n].amp(1);
+      game3_snds[n].amp(0.8);
     }
   }
 }
 
 function game3_obst() {
-  for(let i = 0; i < people.length; i++) {
-    people[i].move();
-    people[i].display();
-  }
+ 
 }
  
 /*****게임 상단 정보 텍스트*****/
-function game3_text(n,time) {
-  rectMode(CENTER);
-  //shadow
-  fill(100,50); //A kind of darkish grey
-  rect(width/2 + 3, 55 + 3, 240, 60, 20);  //Slight offset
-  fill(255, 247, 247); //bg main color
-  rect(width/2, 55, 240, 60, 20);
-  fill(255, 130, 130);
-  textFont(bom);
-  textSize(45);
+function game3_text(n) {
   textAlign(CENTER);
-  text("스테이지 " + (n + 1), width/2 , 70);
   textFont(nanum1);
-  textSize(25);
+  textSize(20);
   fill(85);
-  text("남은 시간 : ", width/2 - 15, 120); 
-  text((game3_timer - time), width/2 + 53,120);
+  text("남은 시간 : ", width/2 - 10, 120); 
+  text((game3_timer - n), width/2 + 43, 120);
+}
+
+function game3_info(t) {
+  fill(60);
+  textFont(bom);
+  textAlign(CENTER);
+  textSize(35);
+  text(t, width/2, 55);
 }
 
 /*****다음 스테이지로 가는 것 알려주기*****/
 function game3_next(n) {
+  frame = 0;
   game3_playing = true;
   if(game3_playing) {
       game3_sw.stop();
@@ -287,11 +267,11 @@ function game3_next(n) {
   fill(255, 200);
   rectMode(CORNER);
   rect(0, 0, width, height);
-  fill(70);
+  fill(100);
   textAlign(CENTER);
-  textSize(40);
+  textSize(35);
   textFont(bom);
-  text("다음 스테이지 →", width/2, height/2 - 85);
+  text("다음 역으로...", width/2, 55);
 }
 
 /*****내리기 버튼*****/

@@ -86,7 +86,7 @@ function story3_8() {
   }
   else fill(0);
   text("대충 알아들은 척하며 꽃을 사서 후다닥 나간다.", 53, 479);
-  if (10 <= mouseX &&mouseX <= 720 &&510 <= mouseY && mouseY <= 540) {
+  if (10 <= mouseX &&mouseX <= 710 &&510 <= mouseY && mouseY <= 540) {
     fill(3, 186, 252);
   }
   else fill(0);
@@ -142,7 +142,7 @@ function story3_13() {
   textAlign(CENTER);
   text("그 시각 꽃집 사장님은...".substring(0, frame), width/2, 120);
   
-  if(frame > 10) {
+  if(frame > 20) {
     back3(12);
     conversation3(14);
     con_text3("<사장님> \n이상하네.. 분명 애인한테 주는 것 같았는데 아네모네를 고른다고?"); 
@@ -215,6 +215,7 @@ function story3_18() {
 
   if(frame > 30) {
     explain3(19);
+    noStroke();
     ex_text3("빨간 튤립을 얻었다!")
     back3(17);
   }
@@ -265,7 +266,7 @@ function conversation3(s) {
     textSize(25);
     textFont(bom);
     if (700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
-      fill(3, 186, 252);
+      fill(255, 163, 182);
     }
     else fill(0);
     textAlign(LEFT);
@@ -292,18 +293,18 @@ function con_text3(t) {
 
 function explain3(s) {
   frame = frame + 1;
-  noStroke();
-  fill(0, 180);
+  fill(180, 180);
   rectMode(CORNER);
-  rect(180, 150);
+  rect(0, 400, 800, 150);
+  
   if (30 <= frame) {
     noStroke();
     textSize(25);
     textFont(bom);
     if (700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
-      fill(3, 186, 252);
+      fill(0);
     }
-    else fill(0);
+    else fill(100);
     textAlign(LEFT);
     text(">>NEXT", 710, 535);
     if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
@@ -327,3 +328,111 @@ function explain3(s) {
     }
   
 
+    //이전 단계로 돌아갈 수 있게 해줍니다. 이전 단계의 stage를 a에 넣어줍니다.
+function back3(a) {
+  frame = frame + 1;
+ if (30 <= frame) {
+   noStroke();
+   textSize(15);
+   textFont(bom);
+   if (4 <= mouseX && mouseX <= 54 && 0 <= mouseY && mouseY <= 30) {
+     fill(245, 87, 66);
+   }
+   else {
+     fill(0);
+   }
+   textAlign(LEFT);
+    text("뒤로<<", 10, 20);
+   if (mouseIsPressed && 4 <= mouseX && mouseX <= 54 && 0 <= mouseY && mouseY <= 30) {
+     stage3 = a;
+     frame = 0;
+     memo_h = 350;
+     flower1_h = -200;
+     flower2_h = -200;
+   }
+ }
+}
+function next3(s) {
+  frame = frame + 1;
+  noStroke();
+  fill(182, 209, 240, 180);
+  rectMode(CORNER);
+  rect(0, 400, 800, 150);
+  if (30 <= frame) {
+    noStroke();
+    textSize(25);
+    textFont(bom);
+    if (700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
+      fill(3, 186, 252);
+    }
+    else fill(0);
+    textAlign(LEFT);
+    text(">>NEXT", 710, 535);
+    if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
+      stage3 = s;
+      frame = 0;
+      flower1_h = -200;
+      flower2_h = -200;
+    }
+  }
+}
+
+    function twoChoose3(x,y){
+      frame = frame + 1;
+      noStroke();
+      
+        fill(182, 209, 240, 180);
+        rectMode(CORNER);
+        rect(0, 390, 800, 160);
+        stroke(250);
+        strokeWeight(2);
+        fill(151, 223, 247);
+        rect(10, 457, 30, 30);
+        rect(10, 510, 30, 30);
+        if (30 <= frame) {
+        noStroke();
+        textSize(20);
+        textAlign(LEFT);
+        textFont(bom);
+        if (10 <= mouseX && mouseX <= 530 && 457 <= mouseY && mouseY <= 505) {
+          fill(3, 186, 252);
+        }
+        else fill(250);
+        text("1", 21, 478);
+        if (10 <= mouseX && mouseX <= 710 && 510 <= mouseY && mouseY <= 540) {
+          fill(3, 186, 252);
+        }
+        else fill(250);
+        text("2", 19, 532);
+    
+        if ( mouseIsPressed &&10 <= mouseX &&mouseX <= 540 && 457 <= mouseY &&mouseY <= 505) {
+            stage3 = x;
+            frame = 0;
+        }
+        if (mouseIsPressed &&10 <= mouseX &&mouseX <= 710 && 510 <= mouseY && mouseY <= 540) {
+            stage3 = y;
+            frame = 0;
+        }
+      }
+    }
+
+    function next33(s) {
+      frame = frame + 1;
+      noStroke();
+      if (30 <= frame) {
+        noStroke();
+        textSize(25);
+        textFont(bom);
+        if (700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
+          fill(3, 186, 252);
+        }
+        else fill(0);
+        textAlign(LEFT);
+        text(">>NEXT", 710, 535);
+        if (mouseIsPressed &&700 <= mouseX && mouseX <= 800 && 510 <= mouseY && mouseY <= 545) {
+          stage3 = s;
+          frame = 0;
+        }
+      }
+    }
+    

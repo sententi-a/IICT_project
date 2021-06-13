@@ -41,23 +41,34 @@ let owner;
 let memo;
 let flower1;
 let flower2;
+let subway_back;
+let subway_front;
 
-let people = [];
-let men = []; //지하철에 서있는 사람들
-let men_px = [];
-let men_py = [];
+let rperson= [];
+let lperson = [];
+let man = []; //지하철에 서있는 사람들
 
 let wobble = 0;
+let wobble1 = 0; 
+let wobble2 = 0;
+let wobble3 = 0;
+let wobble4 = 0;
+let wobble5 = 0;
+let wobble6 = 0;
 let memo_h = 350;
 let flower1_h = -100;
 let flower2_h = -100;
 let speed3 = 10;
+let frame3 = 0;
+
 
 /***** 3일차 게임을 위한 변수들! *****/
 let start_timer = 3; //start 카운트다운 초
-let game3_timer = 115; //게임 총 소요시간
+let game3_timer = 60; //게임 총 소요시간
 let game3_trigger = 1; //start 카운트다운 후 게임 스테이지 시작하게 만들 변수
 let timerOn;
+let px = [4400, 4900, 4850, 4900, 4800]; //역이름 위치
+
 
 let game3_imgs = []; //게임에 쓰일 이미지 모음
 let game3_sw; //sound wave
@@ -110,25 +121,23 @@ function preload() {
   memo = loadImage("assets3/image/memo.png");
   flower1 = loadImage("assets3/image/flower1.png");
   flower2 = loadImage("assets3/image/flower2.png");
+  subway_back = loadImage("assets3/image/station_back.png")
+  subway_front = loadImage("assets3/image/subway_front.png")
   
   game3_sw = new p5.Oscillator();
   game3_sw.setType("triangle");
   for (let i = 0; i < game3_stages; i++) {
-    game3_imgs[i] = loadImage("assets3/image/station" + i + ".png");
+    game3_imgs[i] = loadImage("assets3/image/station_name" + i + ".png");
     game3_snds[i] = loadSound("assets3/sound/station_announce" + i + ".mp3");
   }
-  for (let i = 0; i < 7; i++) {
-    men[i+1] = loadImage("assets3/image/man" + (i+1) + ".png");
+  for (let i = 0; i < 8; i++) {
+    man[i] = loadImage("assets3/image/man" + (i+1) + ".png");
   }
-
-  for (let i = 0; i < 40; i++) {
-    people[i] = new People(
-      random(180, 430),
-      random(260, 320),
-      random(100, 150),
-      random(2),
-      random(200, 235)
-    );
+  for(let i = 0; i< 9; i++) {
+    rperson[i] = loadImage("assets3/image/rperson" + (i+1) +".png");
+  }
+  for(let i =0; i<7; i++) {
+    lperson[i] = loadImage("assets3/image/lperson" + (i+1) +".png");
   }
 }
 
@@ -166,11 +175,6 @@ function setup() {
         break;
       }
     }
-  }
-
-  for(let i = 0; i < 7; i++) {
-    men_px[i] = random(100, 500);
-    men_py[i] = random(100);
   }
 }
 
