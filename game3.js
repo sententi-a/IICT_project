@@ -1,14 +1,13 @@
-/*****게임3 관련 함수들이 모여 있습니다! 꼭 index.html body 안에 import해주세요! *****/
-
-/*****게임3 이전 스토리: 지하철에 사람이 많아짐*****/
-
-
-/*****게임3 세부 스테이지 관리*****/
 function game3() {
-  image(game3_ex, 0, 0, width, height); //예시 이미지 추가 예정입니다! 
+ //힌트 이미지
+  console.log(frameRate());
   if (game3_trigger == 1) {
     //game3의 스테이지 0
-    if(game3_timer <= 59 && game3_timer > 49) {
+    if(game3_timer > 59) {
+      image(game3_ex, 0, 0, width, height); 
+    }
+    else if(game3_timer <= 59 && game3_timer > 49) {
+      st3 = 0;
       game3_image(game3_nums[st3]);
       game3_text(49);
       game3_info("첫 번째 역");
@@ -25,7 +24,6 @@ function game3() {
     else if(game3_timer <= 47 && game3_timer > 37) {
       st3 = 1;
       game3_image(game3_nums[st3]);
-    
       game3_text(37);
       game3_info("두 번째 역");
       game3_sound(game3_nums[st3]);
@@ -80,7 +78,7 @@ function game3() {
     }
     
     //Time Over
-    else if (game3_timer <= 0){
+    else {
       clearInterval(timerOn);
       game3_playing = true;
       if(game3_playing) {
@@ -90,6 +88,7 @@ function game3() {
         game3_snds[st3].stop();
       }
       stage3 = 24;
+      missionsuc3 = 0;
     }
   }
 }
@@ -112,10 +111,10 @@ function game3_description() {
   rect(width/2, 115, 360, 70, 20);
   // text
   fill(255, 130, 130);
-  textFont(bom);
-  textSize(45);
+  textFont(nanum1);
+  textSize(43);
   textAlign(CENTER);
-  text("GAME STAGE", width/2, 135);
+  text("GAME STAGE", width/2, 130);
   
   /**Game description bg**/ 
   //bg shadow
@@ -125,15 +124,15 @@ function game3_description() {
   fill(250);
   rect(width/2, 315, 600, 270, 20);
   //description text
-  textFont(nanum2);
-  textSize(24);
-  fill(85);
-  text("사람들 틈으로 역이름을 포착해 ‘합정역’에서 내려보자!", width/2, 235);
+  textFont(best);
+  textSize(28);
+  fill(65);
+  text("‘합정역’에서 내려보자!", width/2, 235);
   //details
-  textFont(nanum2);
-  textSize(20);
+  textSize(24);
   textLeading(50);
-  text("* 안내 방송이 끝나기 전 ‘합정역’이 보이면 내리기 버튼을 눌러주세요.\n* 총 다섯 개의 역 중 합정역은 두 번 나옵니다.\n* 힌트 듣기를 누르면 안내 방송을 명확하게 들을 수 있어요.", width/2, 295);  
+  fill(85);
+  text("* 지하철 창문 밖으로 ‘합정역’이 보이면 내리기 버튼을 눌러주세요.\n* 총 다섯 개의 역 중 합정역은 두 번 나옵니다.\n* 힌트 듣기를 누르면 안내 방송을 명확하게 들을 수 있어요.", width/2, 295);  
 }
 
 /*****게임시작 버튼*****/
@@ -144,8 +143,8 @@ function game3_start() {
   else fill(255, 130, 130);
   rect(width/2, 500, 120, 50, 30);
   fill(255);
-  textFont(bom);
-  textSize(30);
+  textFont(nanum2);
+  textSize(28);
   textAlign(CENTER);
   text("START", width/2, 500+10);
   
@@ -172,13 +171,14 @@ function timeCount() {
 /*****게임 이미지*****/
 function game3_image(n) {
   image(subway_back, 0, 0, width, height);
-  image(game3_imgs[n],px[n],0,800,600);
-  px[n] -= 10;
+  image(game3_imgs[n],px[n],-5,800,600);
+  px[n] -= 13;
   image(subway_front, 0, 0, width, height);
 }
 
 function game3_answershow(n) {
   image(game3_answer[n], 0, 0, 800, 600);
+   
 }
 
 /*****사운드 플레이, 플레이할 사운드는 n에 숫자 넣어서 선택!*****/
@@ -186,19 +186,19 @@ function game3_sound(n) {
   if(hint != 1) {
     rectMode(CORNER);
     fill(150);
-    rect(650, 30, 120, 40, 30);
+    rect(600, 25, 120, 40, 30);
     fill(0);
     textSize(23);
     textAlign(CENTER);
     textFont(bom);
-    text("힌트 소진",710, 58);
+    text("힌트 소진",660, 53);
   }
 
     //sound wave (좋지 않은 소리)
   if(hint == 1 || (hint == -3 && (game3_timer == 59 || game3_timer == 47 || game3_timer == 35 || game3_timer == 23 || game3_timer == 11))) {
     game3_playing = false;
   }
-  game3_sw.amp(0.05);
+  game3_sw.amp(0.01);
   game3_sw.freq(random(20, 50));
   if(!game3_playing) {
     game3_sw.start();
@@ -213,29 +213,27 @@ function game3_sound(n) {
   if(hint == 1) {
     //힌트 듣기 버튼
     noStroke();
-    fill(143, 212, 255); 
+    // fill(143, 212, 255); 
+    fill(255, 255, 0);
     rectMode(CORNER);
-    rect(650, 30, 120, 40, 30);
+    rect(600, 25, 120, 40, 30);
     textSize(23);
-    textFont(bom);
-    if(mouseX >= 650 && mouseX <= 770 && mouseY >= 30 && mouseY <=70) fill(28, 170, 255);
-    else fill(255);
+    textFont(nanum2);
+    if(mouseX >= 600 && mouseX <= 720 && mouseY >= 25 && mouseY <=65) fill(255,0,0);
+    else fill(0);
     textAlign(CENTER);
-    text("힌트 듣기",710, 58);
-    if(mouseIsPressed && mouseX >= 650 && mouseX <= 770 && mouseY >= 30 && mouseY <=70) {
+    text("힌트 듣기",660, 53);
+    if(mouseIsPressed && mouseX >= 600 && mouseX <= 720 && mouseY >= 25 && mouseY <=65) {
       game3_playing = true;
       if(game3_playing) {
         game3_sw.stop();
       }
       hint = -3;
-      game3_snds[n].amp(0.5);
+      game3_snds[n].amp(0.2);
     }
   }
 }
 
-function game3_obst() {
- 
-}
  
 /*****게임 상단 정보 텍스트*****/
 function game3_text(n) {
@@ -281,10 +279,10 @@ function game3_next(n) {
 function game3_check(num) {
   rectMode(CENTER);
   noStroke();
-  if(mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30) fill(255, 100, 100);
+  if(mouseX >= width/2 - 60 && mouseX < width/2+60 && mouseY >= 500 - 30 && mouseY < 500 + 30)  fill(255, 100, 100);
   else fill(255, 130, 130);
   rect(width/2, 500, 120, 60, 30);
-  textFont(bom);
+  textFont(nanum2);
   textSize(30);
   fill(255);
   textAlign(CENTER);
@@ -300,6 +298,7 @@ function game3_check(num) {
     if (game3_snds[num].isPlaying()) {
       game3_snds[num].stop();
     }
+    missionsuc3 = 1;
     stage3 = 25; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
   }
   //그 외의 역에서 내린다면 FAIL
@@ -312,22 +311,23 @@ function game3_check(num) {
     if (game3_snds[num].isPlaying()) {
       game3_snds[num].stop();
     }
+    missionsuc3 = 0
     stage3 = 24; //꼭 stage3 숫자 맞춰 변경하기 (플레이테스트 말고 최종때!)
   }
 }
 
 /*****게임 실패*****/
 function game3_fail() {
-  clearInterval(timerOn);
   game3_answershow(game3_nums[st3]);
-  fill(255, 50);
+  fill(245, 151, 120, 200);
   rectMode(CORNER);
-  rect(0, 0, width, height);
-  textSize(70);
+  rect(200, 70, 400, 100);
+  fill(0);
+  textSize(30);
   textAlign(CENTER);
-  textFont(bom);
-  fill(255, 130, 130);
-  text("GAME OVER", width/2, height/2 - 150);
+  textFont(best);
+  text("게임 실패!", width/2, 130);
+  allmission();
   next33(26);
 
   //다음으로 버튼
@@ -349,14 +349,15 @@ function game3_fail() {
 /*****게임 성공*****/
 function game3_success() {
   game3_answershow(game3_nums[st3]);
-  fill(255, 50);
+  fill(169, 210, 214, 200);
   rectMode(CORNER);
-  rect(0, 0, width, height);
-  textSize(70);
-  textFont(bom);
+  rect(200, 70, 400, 100);
+  fill(0);
+  textSize(30);
+  textFont(best);
   textAlign(CENTER);
-  fill(28, 170, 255);
-  text("SUCCESS!", width/2, height/2 -150);
+  text("게임 성공!", width/2, 130);
+   allmission();
   next33(32);
   //다음으로 버튼
   // rectMode(CENTER);
