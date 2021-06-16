@@ -91,8 +91,8 @@ function story3_6() {
     image(owner, 0, 0, width, height);
     pop();
   }
-  
-  if(frame >20 ) {
+
+  if (frame > 20) {
     back3(5);
     conversation3(7);
     con_text3("<사장님>\n @#$&!@#*$&!*#$!");
@@ -151,7 +151,7 @@ function story3_9() {
 function story3_10() {
   image(flowerin, 0, 0, width, height);
   frame += 1;
-  
+
   image(owner, 0, 0, width, height);
   back3(9);
   conversation3(11);
@@ -544,21 +544,21 @@ function story3_35() {
   allmission();
   if (frame > 10) {
     push();
-    tint(255, frame * 10);
+    tint(255, frame * 15);
     image(girlwalk, girlx, girly, width, height);
     pop();
     girlx -= 0.2;
     girly += 0.1;
   }
+  if (frame > 30) {
+    girlx = -4;
+    girly = 2;
+  }
 
-  if (frame > 20) {
+  if (frame > 35) {
     next3(36);
     main_text("어? 지은인가..?");
     back3(34);
-  }
-  if (frame > 200) {
-    girlx = -14;
-    girly = 7;
   }
 }
 
@@ -738,11 +738,10 @@ function back3(a) {
       speed3 = 10;
       girlx = 0;
       girly = 0;
-      if(stage3 == 9) {
+      if (stage3 == 9) {
         anemone = false;
         tulip = false;
       }
-
     }
   }
 }
