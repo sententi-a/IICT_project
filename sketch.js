@@ -2214,7 +2214,7 @@ function draw() {
           story3_37(); //지은이 얼굴 크게
           break;
 
-        case 38:
+        case 38: //에필로그 #1
           if (bgmcontrol7 == false) {
             endingsound.setVolume(0.003);
             endingsound.play();
@@ -2326,7 +2326,8 @@ function draw() {
           pop();
           next33(39);
           break;
-        case 39:
+
+        case 39: //에필로그 #2
           if (bgmcontrol7 == false) {
             endingsound.setVolume(0.003);
             endingsound.play();
@@ -2344,6 +2345,7 @@ function draw() {
           text("에필로그", 345, 80);
           push();
           translate(10, 25);
+
           if (missionsuc3 == 1 && late == 1) {
             push();
             translate(0, -300);
@@ -2461,6 +2463,7 @@ function draw() {
           back3(38);
 
           break;
+
         case 40:
           if (bgmcontrol7 == false) {
             endingsound.setVolume(0.003);
@@ -2586,10 +2589,10 @@ function draw() {
           fill(0);
           textFont(best);
           textSize(20);
-          text("Press ENTER to RESTART!", 325, 590);
+          text("Press ALT to RESTART!", 328, 590);
           back3(39);
 
-          if (keyCode === ENTER) {
+          if (keyCode === ALT) {
             resetAll();
           }
           break;
